@@ -1,15 +1,14 @@
 @extends('admin.index')
 @section('content')
 <section style="padding-top:60px;">
-    <div class="container" style="width: 95rem;">
-        <div class="col-md-8 offset-md-2">
-            <div class="card">
-               <div class="card-header">Update Services
-               <a href="{{route('service.index')}}" style="float:right;" class="btn btn-primary "> List</a>
-               
-               </div>
-               <div class="card-body">
-
+   <div class="container">
+   <div class="col-md-8 offset-md-1">
+      <div class="card p-2 mb-5">
+         <div class="card-header text-bold text-white bg-primary">
+            Update Services
+         </div>
+         <div class="card-body">
+   
                         <form method="POST" action="{{route('service.update',$service->id)}}" enctype="multipart/form-data" >
                            @method('PUT')
                             @csrf
@@ -46,7 +45,7 @@
 
                             <div class="form-group">
                              
-                            <img src="{{asset('service_image')}}/{{$service->image}}" id="output" width="250px;" height="200px;" alt="image">
+                            <img src="{{asset('images/our_services')}}/{{$service->image}}" id="output" width="250px;" height="200px;" alt="image">
                           
 
                             <input type="file" name="image" onchange="loadFile(event)" value="{{$service->image}}"  class="form-control" class="@error('image') is-valid @enderror" />                            
@@ -56,15 +55,14 @@
                             </div>
 
 
-                            <button type="submit" class="btn btn-success" >Add Services</button>
+                            <button type="submit" class="btn btn-primary" >Update</button>
 
                         </form>               
-                    </div>
-                   
-             </div>
-        </div>
-    </div>
-</section>    
+                     </div>
+         </div>
+      </div>
+   </div>
+</section>   
 @endsection
 <script>
   var loadFile = function(event) {

@@ -15,8 +15,9 @@ class CreateSiteIdentitiesTable extends Migration
     {
         Schema::create('site_identities', function (Blueprint $table) {
             $table->id();
-            $table->string('site_name');
+            $table->string('title');
             $table->string('logo');
+            $table->string('link');
             $table->timestamps();
         });
     }

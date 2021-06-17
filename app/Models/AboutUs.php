@@ -9,11 +9,11 @@ class AboutUs extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'description',
-        'full_address',
-        'contact',
-        'email',
-        'social_links',
+        'name',
+        'image',
+        'position',
+        'facebook_link',
+        'twitter_link',
 
     ];
 }

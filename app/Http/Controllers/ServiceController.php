@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Services;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
+use Image;
+
 
 class ServiceController extends Controller
 {
@@ -43,12 +46,24 @@ class ServiceController extends Controller
             'image'=>'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
 
         ]);
+
         if($request->hasFile('image'))
         {
          $image=$request->file('image');
          $imageName = time().'.'.$image->getClientOriginalExtension(); 
-         $image->move(public_path('service_image'), $imageName);
-        }else{
+
+        $destinationPath = public_path('images/our_services');
+
+        if (!file_exists($destinationPath)) {
+            mkdir($destinationPath, 666, true);
+        }
+        $img = Image::make($image->path());
+        $img->resize(300, 250, function ($constraint) {
+            $constraint->aspectRatio();
+        })->save($destinationPath.'/'.$imageName);
+  
+      $image->move($destinationPath, $imageName);
+           }else{
              $imageName=null;
  
         }
@@ -109,13 +124,23 @@ class ServiceController extends Controller
         ]);
        
         $service=Services::findOrFail($id);
-        if($request->hasFile('image'))
+    if($request->hasFile('image'))
         {
          $image=$request->file('image');
          $imageName = time().'.'.$image->getClientOriginalName(); 
-         $image->move(public_path('service_image'), $imageName);
-         $service->image->$request->file('image')->getClientOrginalName();
-           }
+         $image->move(public_path('images/our_services/'), $imageName);
+       
+          $oldFilename=$service->image;
+         $service->image=$imageName;  
+
+         File::delete(public_path('images/our_services/'. $oldFilename));
+        
+         $service->update([
+            'image'=>$imageName,
+         ]); 
+       
+        }
+        
         $service->update([
             'description' =>$request->description,
             'title' => $request->title,
@@ -142,6 +167,14 @@ class ServiceController extends Controller
      */
     public function destroy($id)
     {
-        //
+       $service=Services::findOrFail($id);
+        $oldFilename=$service->image;  
+        File::delete(public_path('images/our_services/'. $oldFilename));
+        $service->delete();
+      return redirect()
+    ->route('service.index')
+    ->with('warning','Services information has sucessfully Delete');
+
+
     }
 }

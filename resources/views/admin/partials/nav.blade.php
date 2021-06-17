@@ -30,24 +30,84 @@
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
+                <a class="nav-link collapsed" href="{{route('intro.index')}}"  aria-expanded="true">
+                     <i class="fas fa-fw fa-file"></i>
+                            <span>Intro</span>
+                        </a>
+                        
+            </li>
+             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
                      <i class="fas fa-fw fa-file"></i>
-                            <span>Page Management</span>
+                            <span>About Us</span>
                         </a>
                             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                             <div class="bg-white py-2 collapse-inner rounded">
                             <h6 class="collapse-header">User Pages:</h6>
-                            <a class="collapse-item" href="{{route('siteidentity.index')}}">
-                            Site Identity </a>
+                            <a class="collapse-item" href="{{route('intro.index')}}">
+                            Intro</a>
                             <a class="collapse-item" href="{{route('aboutus.index')}}">
-                            About Us</a>
-                            <a class="collapse-item" href="{{route('service.index')}}">
-                            Services</a>
-                            <a class="collapse-item" href="#">
-                            Our Work</a>
+                            Members</a>
+                           
                         </div>
                  </div>
             </li>
-           
-            
+             <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsethree" aria-expanded="true" aria-controls="collapseTwo">
+                     <i class="fas fa-fw fa-file"></i>
+                            <span>Our Services</span>
+                        </a>
+                            <div id="collapsethree" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">User Pages:</h6>
+                            <a class="collapse-item" href="{{route('intro.index')}}">
+                            Intro</a>
+                            <a class="collapse-item" href="{{route('service.index')}}">
+                            Services List</a>
+                           
+                        </div>
+                 </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsefour" aria-expanded="true" aria-controls="collapseTwo">
+                     <i class="fas fa-fw fa-file"></i>
+                            <span>Portfolio</span>
+                        </a>
+                            <div id="collapsefour" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">User Pages:</h6>
+                            <a class="collapse-item" href="{{route('intro.index')}}">
+                            Intro</a>
+                            <a class="collapse-item" href="{{route('client.index')}}">
+                            Our Client</a>
+                           
+                        </div>
+                 </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsefive" aria-expanded="true" aria-controls="collapseTwo">
+                     <i class="fas fa-fw fa-file"></i>
+                            <span>Contact us</span>
+                        </a>
+                            <div id="collapsefive" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">User Pages:</h6>
+                            <a class="collapse-item" href="{{route('contact.index')}}">
+                            Intro</a>
+                            <a class="collapse-item" href="{{route('siteidentity.index')}}">
+                            Social Media</a>
+                           
+                        </div>
+                 </div>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#"  aria-expanded="true" aria-controls="collapseTwo">
+                     <i class="fas fa-fw fa-file"></i>
+                            <span>Inquery</span>
+                        </a>
+
+            </li>
+
+
 </ul>

@@ -1,61 +1,66 @@
 @extends('admin.index')
 @section('content')
 <section style="padding-top:60px;">
-    <div class="container">
-        <div class="col-md-12">
-            <div class="card">
-               <div class="card-header text-center text-white text-bold bg-secondary"><h1>AboutUs</h1>
-               </div>
-            
-     
-                       <table class="table table-striped">
-                       
+   <div class="container">
+      <div class="col-md-12">
+         <div class="card p-2">
+            <div class="card-body">
+      
+                       <table class="table table-striped" style="width:100%"  id="datatable">
+
                        <thead class="thead-dark">
                             <tr>
                                 <th>S.no</th>
-                                <th>Description</th>
-                                <th>full_address</th>
-                                <th>Contact</th>
-                                <th>Email</th>
-                                <th>Social Links</th>
+                                
+                                <th>Name</th>
+                                <th>Image</th>
+                                <th>Position</th>
+                                <th>Facebook Link</th>
+                                <th>Twitter Link</th>
                                 <th>Action</th>
                             </tr>
                        </thead>
 
                        <tbody>
-                       @foreach($about as $s)
-                            <tr>
+                       @foreach($about as $aboutus)
+                        <tr>
                             <td>{{ $loop->iteration }}</td>
                             
-                            <td>{{$s->description}}</td>
-                            <td>{{$s->full_address}}</td>
-                            <td>{{$s->contact}}</td>
-                            <td>{{$s->email}}</td>
-                            <td>{{$s->social_links}}</td>
-                            
+                            <td>{{$aboutus->name}}</td>
                             <td>
-                            <div class="btn-group">
-                           
-                                <a href="{{route('aboutus.edit',$s->id)}}" class="btn btn-success btn-sm mr-1"><i class="fa fa-edit"></i></a>
-                                <button class="btn btn-danger btn-sm mr-1 " onclick="handeldelete({{$s->id}})"><i class="fa fa-trash"></i></a>
-                            </div>
-                            </td>
-                            </tr>
+                                <img src="{{asset('images/member')}}/{{$aboutus->image}}" height="100px;" width="100px;"/>
 
+                            </td>
+                         
+                            <td>{{$aboutus->position}}</td>
+                            <td>{{$aboutus->facebook_link}}</td>
+                            <td>{{$aboutus->twitter_link}}</td>     
+                            <td>
+                                 <div class="btn-group">
+                                     <a href="{{route('aboutus.edit',$aboutus->id)}}" class="btn btn-success btn-sm mr-1"><i class="fa fa-edit"></i></a>
+                                    <button class="btn btn-danger btn-sm mr-1 "  onclick="handeldelete({{$aboutus->id}})"><i class="fa fa-trash"></i></a>
+                                </div> 
+                             </td>
+                                                  
+                        </tr>
+    
 
                        @endforeach
                        
                        </tbody>
                        
                        </table>       
+                         <a href="{{route('aboutus.create')}}" class="btn btn-primary btn-sm">Create Members</a>
+             
                     </div>
-                 <a href="{{route('aboutus.create')}}" class="btn btn-success btn-sm">Create New</a>
-                    
-             </div>
-        </div>
-    </div>
-</div>
-</section> 
+               </div> 
+            </div>
+         </div>
+      </div>
+   </div>
+</section>
+
+
 <!-- Mymodel for delete -->
 <div id="deletemodal" class="modal fade">
 	<div class="modal-dialog modal-confirm">

@@ -1,22 +1,21 @@
 @extends('admin.index')
 @section('content')
 <section style="padding-top:60px;">
-    <div class="container" style="width: 95rem;">
-        <div class="col-md-8 offset-md-2">
-            <div class="card">
-               <div class="card-header">Add SiteIdentity
-               <a href="{{route('siteidentity.index')}}" style="float:right;" class="btn btn-primary ">SiteIdentity List</a>
-               
-               </div>
-               <div class="card-body">
+   <div class="container">
+   <div class="col-md-8 offset-md-1">
+      <div class="card p-2 mb-5">
+         <div class="card-header text-bold text-white bg-primary">
+           Update Social media 
+         </div>
+         <div class="card-body">
 
                         <form method="POST" action="{{route('siteidentity.update', $site->id)}}" enctype="multipart/form-data" >
                            @method('PUT')
                             @csrf
                 
                             <div class="form-group">
-                              <label for ="categoryid">  Site Name </label>
-                              <input type="text" name="site_name" class="form-control" class="@error('site_name') is-valid @enderror" value="{{$site->site_name}}"/>                 
+                              <label for ="categoryid">Title</label>
+                              <input type="text" name="title" class="form-control" class="@error('site_name') is-valid @enderror" value="{{$site->title}}"/>                 
                               @error('site_name')
                                 <div class="alert alert-danger">{{ $message }}</div>
                                @enderror                            
@@ -31,6 +30,14 @@
                             @error('logo')
                                 <div class="alert alert-danger">{{ $message }}</div>
                                @enderror   
+                            </div>
+
+                             <div class="form-group">
+                              <label for ="categoryid">Link </label>
+                              <input type="text" name="link" value="{{$site->link}}" class="form-control" class="@error('link') is-valid @enderror" placeholder="Enter Link"/>                 
+                              @error('link')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                               @enderror                            
                             </div>
 
 

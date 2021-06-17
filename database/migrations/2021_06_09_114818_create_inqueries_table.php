@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateOurWorksTable extends Migration
+class CreateInqueriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,12 @@ class CreateOurWorksTable extends Migration
      */
     public function up()
     {
-        Schema::create('our_works', function (Blueprint $table) {
+        Schema::create('inqueries', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->string('description');
-            $table->string('short_description');
-            $table->string('link');
-            $table->string('image');
+            $table->string('name');
+            $table->string('email');
+            $table->string('subject');
+            $table->longText('message');
             $table->timestamps();
         });
     }
@@ -31,6 +30,6 @@ class CreateOurWorksTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('our_works');
+        Schema::dropIfExists('inqueries');
     }
 }

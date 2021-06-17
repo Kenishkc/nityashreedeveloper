@@ -1,69 +1,81 @@
 @extends('admin.index')
 @section('content')
 <section style="padding-top:60px;">
-    <div class="container" style="width: 95rem;">
-        <div class="col-md-8 offset-md-2">
-            <div class="card">
-               <div class="card-header"><i class="fa fa-plus"></i> Add 
-               <a href="{{route('aboutus.index')}}" style="float:right;" class="btn btn-primary ">Aboutus List</a>
-               
-               </div>
-               <div class="card-body">
+   <div class="container">
+   <div class="col-md-8 offset-md-1">
+      <div class="card p-2 mb-5">
+         <div class="card-header text-bold text-white bg-primary">
+            Update Members
+         </div>
+         <div class="card-body">
+            <form action="{{ route('aboutus.update',$about->id) }}" method="POST" enctype="multipart/form-data">
+              @method('PUT') 
+              @csrf
 
-                        <form method="POST" action="{{route('aboutus.update',$about->id)}}"  >
-                           @method('PUT')
-                            @csrf
-                
-                            <div class="form-group">
-                              <label for ="description"> Description </label>
-                              <input type="text" name="description" class="form-control" class="@error('description') is-valid @enderror" value="{{$about->description}}"/>                 
-                              @error('description')
-                                <div class="alert alert-danger">{{ $message }}</div>
-                               @enderror                            
-                            </div>
-                            
-                            <div class="form-group">
-                              <label for ="full address">full address </label>
-                              <input type="text" name="full_address" class="form-control" class="@error('full_address') is-valid @enderror" value="{{$about->full_address}}"/>                 
-                              @error('full_address')
-                                <div class="alert alert-danger">{{ $message }}</div>
-                               @enderror                            
-                            </div>
+               <div class="row">
+                  <div class="col-xs-12 col-sm-12 col-md-12">
+                     <div class="form-group">
+                        <strong>Name :</strong>
+                        <input type="text" name="name" value="{{ $about->name}}" class="form-control" placeholder="Enter Member Name">
+                     </div>
+                  </div>
+                 
+                  <div class="col-xs-12 col-sm-12 col-md-12">
+                     <div class="from-group"> 
+                        <strong>Image:</strong>
+                        <input name="image" type="file"  onchange="readUrl(this,'preview')" class="form-control" />
+                        <img src="{{asset('images/member')}}/{{$about->image}}" id="preview" style="max-height:100px;"/>  
+                     </div>
+                  </div>
 
-                            <div class="form-group">
-                              <label for ="Contact">Contact </label>
-                              <input type="tel" name="contact" class="form-control" class="@error('contact') is-valid @enderror" value="{{$about->contact}}"/>                 
-                              @error('contact')
-                                <div class="alert alert-danger">{{ $message }}</div>
-                               @enderror                            
-                            </div>
+                     <div class="col-xs-12 col-sm-12 col-md-12">
+                        <div class="form-group">
+                            <strong>Position :</strong>
+                            <input type="text" value="{{ $about->position}}" name="position" class="form-control" placeholder="Enter Member Position">
+                        </div>
+                     </div>   
+
+                      <div class="col-xs-12 col-sm-12 col-md-12">
+                        <div class="form-group">
+                            <strong>Facebook Link:</strong>
+                            <input type="text" name="facebook_link" value="{{ $about->facebook_link}}" class="form-control" placeholder="Enter facebook link">
+                        </div>
+                     </div>   
+
+                      <div class="col-xs-12 col-sm-12 col-md-12">
+                        <div class="form-group">
+                            <strong>Twitter Link:</strong>
+                            <input type="text" name="twitter_link"  value="{{ $about->twitter_link}}" class="form-control" placeholder="Enter twitter link">
+                        </div>
+                     </div>   
+              
+                    <div class="col-xs-12 col-sm-12 col-md-12 ">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <a href="{{ route('aboutus.index') }}" class="btn btn-danger mr-1 float-right"><i class="fas fa-undo"></i> Back </a>
+                       
+                     </div>
+                  </div>
+                 
+            </form>
+            </div>
+         </div>
+      </div>
+   </div>
+</section>   
 
 
-                            <div class="form-group">
-                              <label for ="Email address">Email</label>
-                              <input type="email" name="email" class="form-control" class="@error('email') is-valid @enderror" value="{{$about->email}}"/>                 
-                              @error('email')
-                                <div class="alert alert-danger">{{ $message }}</div>
-                               @enderror                            
-                            </div>
 
-
-                            <div class="form-group">
-                              <label for ="social_links ">social_links</label>
-                              <input type="url" name="social_links" class="form-control" class="@error('social_links') is-valid @enderror" value="{{$about->social_links}}" />                 
-                              @error('social_links')
-                                <div class="alert alert-danger">{{ $message }}</div>
-                               @enderror                            
-                            </div>
-
-
-                            <button type="submit" class="btn btn-success" >Upadte Aboutus</button>
-
-                        </form>               
-                    </div>
-                   
-             </div>
-        </div>
-    </div>
-</section>    
 @endsection
+
+<script>
+function readUrl(input,id){
+if(input.files && input.files[0]){
+  var reader = new FileReader();
+  reader.onload = function(e){
+    $("#" + id).attr("src",e.target.result);
+  };
+  reader.readAsDataURL(input.files[0]);
+}
+}
+</script>  
+   

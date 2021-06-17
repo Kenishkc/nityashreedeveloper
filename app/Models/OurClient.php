@@ -5,14 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class SiteIdentity extends Model
+class OurClient extends Model
 {
     use HasFactory;
-    protected $fillable = [
+    protected $fillable=[
         'title',
-        'logo',
-        'link'
-
+        'category',
+        'image',
+        'technology'
     ];
-
 }

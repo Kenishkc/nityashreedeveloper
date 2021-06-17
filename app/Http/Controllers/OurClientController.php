@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\AboutUs;
+use App\Models\OurClient;
 use Illuminate\Http\Request;
-use Image;
 use Illuminate\Support\Facades\File;
+use Image;
 
-class AboutUsController extends Controller
+class OurClientController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +16,8 @@ class AboutUsController extends Controller
      */
     public function index()
     {
-        $about=AboutUs::orderBy('id','ASC')->get();
-        return view('admin.aboutus.index',compact('about'));
+        $client=OurClient::all();
+        return view('admin.ourclient.index',compact('client'));
     }
 
     /**
@@ -27,7 +27,7 @@ class AboutUsController extends Controller
      */
     public function create()
     {
-        return view('admin.aboutus.add');
+         return view('admin.ourclient.add');
     }
 
     /**
@@ -38,26 +38,25 @@ class AboutUsController extends Controller
      */
     public function store(Request $request)
     {
+        
         $this->validate($request, [
-            'name' => 'required',
+            'title'=>'required',
             'image'=>'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
 
- 
         ]);
 
-
-           if($request->hasFile('image'))
+        if($request->hasFile('image'))
         {
          $image=$request->file('image');
          $imageName = time().'.'.$image->getClientOriginalExtension(); 
 
-        $destinationPath = public_path('images/member');
+        $destinationPath = public_path('images/our_client');
 
         if (!file_exists($destinationPath)) {
             mkdir($destinationPath, 666, true);
         }
         $img = Image::make($image->path());
-        $img->resize(250,250, function ($constraint) {
+        $img->resize(250,450, function ($constraint) {
             $constraint->aspectRatio();
         })->save($destinationPath.'/'.$imageName);
  
@@ -69,20 +68,17 @@ class AboutUsController extends Controller
  
         }
 
-    AboutUs::create([
-        'name' =>$request->name,
-        'position' => $request->position,
-        'facebook_link' => $request->facebook_link,
-        'twitter_link'=>$request->twitter_link,
-        'image'=>$imageName,
-    ]);
-    
-    return redirect()
-    ->route('aboutus.index')
-    ->with('success','Member information has sucessfully created');
-    
-    
-    
+       $client =OurClient::create([
+           'title'=>$request->title,
+           'category'=>$request->category,
+           'technology'=>$request->technology,
+           'image'=>$imageName,
+       ]);
+ return redirect()
+    ->route('client.index')
+    ->with('success','Client information has sucessfully created');
+  
+
     }
 
     /**
@@ -104,8 +100,8 @@ class AboutUsController extends Controller
      */
     public function edit($id)
     {
-        $about=AboutUs::findOrFail($id);
-        return view('admin.aboutus.edit',compact('about'));
+        $client=OurClient::findOrFail($id);
+         return view('admin.ourclient.edit',compact('client'));
     }
 
     /**
@@ -117,39 +113,45 @@ class AboutUsController extends Controller
      */
     public function update(Request $request, $id)
     {
-       $about=AboutUs::findOrFail($id);
-     
-    
-    
-        if($request->hasFile('image'))
+               
+  $this->validate($request, [
+              'title'=>'required',
+            'image'=>'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+
+        ]);
+        $client=OurClient::findOrFail($id);
+    if($request->hasFile('image'))
        {
         $image=$request->file('image');
         $imageName = time().'.'.$image->getClientOriginalExtension(); 
-        $image->move(public_path('images/member'), $imageName);
+        $image->move(public_path('images/our_client'), $imageName);
         
-        $oldFilename=$about->image;
-        $about->image=$imageName;  
+        $oldFilename=$client->image;
+        $client->image=$imageName;  
 
-        File::delete(public_path('images/member/'. $oldFilename));
+        File::delete(public_path('images/our_client/'. $oldFilename));
         
-        $about->update([
+        $client->update([
             'image'=>$imageName,
         ]); 
-     }
+    }
 
-        
-        $about->update([
-        'name' =>$request->name,
-        'position' => $request->position,
-        'facebook_link' => $request->facebook_link,
-        'twitter_link'=>$request->twitter_link,
-       
-    ]);
-    
-    return redirect()
-    ->route('aboutus.index')
-    ->with('success','Member information has sucessfully Updated');
-    
+
+        $client->update([
+            'title'=>$request->title,
+           'category'=>$request->category,
+           'technology'=>$request->technology,
+
+        ]);
+        return redirect()
+            ->route('client.index')
+            ->with('success','Client information has sucessfully Update');
+
+
+
+
+
+
     }
 
     /**
@@ -160,12 +162,15 @@ class AboutUsController extends Controller
      */
     public function destroy($id)
     {
-       $about=AboutUs::find($id);
-        $oldFilename=$about->image;  
-        File::delete(public_path('images/member/'. $oldFilename));
-        $about->delete();
+          $client=OurClient::findOrFail($id);
+            $oldFilename=$client->image;
+            File::delete(public_path('images/our_client/'. $oldFilename));
+        $client->delete();
          return redirect()
-        ->route('aboutus.index')
-        ->with('error','Member Information has sucessfully Delete');
+            ->route('client.index')
+            ->with('success','Client information has sucessfully Delete');
+
+
+      
     }
 }

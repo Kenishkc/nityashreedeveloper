@@ -5,55 +5,47 @@
    <div class="col-md-8 offset-md-1">
       <div class="card p-2 mb-5">
          <div class="card-header text-bold text-white bg-primary">
-            Add Members
+            Add Client 
          </div>
          <div class="card-body">
-            <form action="{{ route('aboutus.store') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('client.store') }}" method="POST" enctype="multipart/form-data">
                @csrf
                <div class="row">
                   <div class="col-xs-12 col-sm-12 col-md-12">
                      <div class="form-group">
-                        <strong>Name :</strong>
-                        <input type="text" name="name" class="form-control" placeholder="Enter Member Name">
+                        <strong>Title :</strong>
+                        <input type="text" name="title" class="form-control" placeholder="Enter title">
                      </div>
                   </div>
                  
                   <div class="col-xs-12 col-sm-12 col-md-12">
                      <div class="from-group"> 
-                        <strong>Image:</strong>
+                        <strong> Image:</strong>
                         <input name="image" type="file"  onchange="readUrl(this,'preview')" class="form-control" />
                         <img src="" id="preview" style="max-height:100px;"/>  
                      </div>
                   </div>
+                     <div class="col-xs-12 col-sm-12 col-md-12">
+                        <div class="form-group">
+                           <strong>Category:</strong>
+                        <input type="text" name="category" class="form-control" placeholder="Enter Category">
+                       </div>
+                     </div>
+                    
 
                      <div class="col-xs-12 col-sm-12 col-md-12">
                         <div class="form-group">
-                            <strong>Position :</strong>
-                            <input type="text" name="position" class="form-control" placeholder="Enter Member Position">
-                        </div>
-                     </div>   
-
-                      <div class="col-xs-12 col-sm-12 col-md-12">
-                        <div class="form-group">
-                            <strong>Facebook Link:</strong>
-                            <input type="text" name="facebook_link" class="form-control" placeholder="Enter facebook link">
-                        </div>
-                     </div>   
-
-                      <div class="col-xs-12 col-sm-12 col-md-12">
-                        <div class="form-group">
-                            <strong>Twitter Link:</strong>
-                            <input type="text" name="twitter_link" class="form-control" placeholder="Enter twitter link">
-                        </div>
-                     </div>   
-              
-                    <div class="col-xs-12 col-sm-12 col-md-12 ">
+                           <strong>Technology:</strong>
+                        <input type="text" name="technology" class="form-control" placeholder="Enter Technology">
+                       </div>
+                     </div>
+                    
+                     <div class="col-xs-12 col-sm-12 col-md-12 ">
                         <button type="submit" class="btn btn-primary">Submit</button>
-                        <a href="{{ route('aboutus.index') }}" class="btn btn-danger mr-1 float-right"><i class="fas fa-undo"></i> Back </a>
+                        <a href="{{ route('client.index') }}" class="btn btn-danger mr-1 float-right"><i class="fas fa-undo"></i> Back </a>
                        
                      </div>
                   </div>
-                 
             </form>
             </div>
          </div>
@@ -76,4 +68,3 @@ if(input.files && input.files[0]){
 }
 }
 </script>  
-   

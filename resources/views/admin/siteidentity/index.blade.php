@@ -1,21 +1,20 @@
 @extends('admin.index')
 @section('content')
 <section style="padding-top:60px;">
-    <div class="container">
-        <div class="col-md-12">
-            <div class="card">
-               <div class="card-header text-center text-white text-bold bg-secondary"><h1>SiteIdentity List</h1>
-               </div>
-            
-     
-                       <table class="table table-striped">
-                       
+   <div class="container">
+      <div class="col-md-12">
+         <div class="card p-2">
+            <div class="card-body">
+      
+                       <table class="table table-striped" style="width:100%"  id="datatable">
+
                        <thead class="thead-dark">
-                            <tr>
+                        <tr>
                                 <th>S.no</th>
                                 
-                                <th>Site Name</th>
+                                <th>Title</th>
                                 <th>Logo</th>
+                                <th>Link</th>
                                 <th>Action</th>
                             </tr>
                        </thead>
@@ -25,9 +24,13 @@
                             <tr>
                             <td>{{ $loop->iteration }}</td>
                             
-                            <td>{{$s->site_name}}</td>
+                            <td>{{$s->title}}</td>
                             
                             <td> <img src="{{asset('logo')}}/{{$s->logo}}" width="100px;" height="100px;" alt="image"></td>
+                           
+                             <td>{{$s->link}}</td>
+                         
+                           
                             <td>
                             <div class="btn-group">
                            
@@ -43,14 +46,18 @@
                        </tbody>
                        
                        </table>       
+                         <a href="{{route('siteidentity.create')}}" class="btn btn-success btn-sm">Create</a>
+             
                     </div>
-                 <a href="{{route('siteidentity.create')}}" class="btn btn-success btn-sm">Create New SiteIdentity</a>
-                    
-             </div>
-        </div>
-    </div>
-</div>
-</section> 
+                
+                    </div>
+               </div> 
+            </div>
+         </div>
+      </div>
+   </div>
+</section>
+
 <!-- Mymodel for delete -->
 <div id="deletemodal" class="modal fade">
 	<div class="modal-dialog modal-confirm">

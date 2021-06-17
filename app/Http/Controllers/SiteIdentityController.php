@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\SiteIdentity;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class SiteIdentityController extends Controller
 {
@@ -38,8 +39,9 @@ class SiteIdentityController extends Controller
     {
 
         $this->validate($request, [
-            'site_name' => 'required',
+            'title' => 'required',
             'logo'=>'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+             'link' => 'required',
             
         ]);
 
@@ -53,8 +55,9 @@ class SiteIdentityController extends Controller
  
         }
        SiteIdentity::create([
-            'site_name'=>$request->site_name,
-            'logo'=>$imageName
+            'title'=>$request->title,
+            'logo'=>$imageName,
+            'link'=>$request->link,
        ]);
        return redirect()
         ->route('siteidentity.index')
@@ -95,33 +98,40 @@ class SiteIdentityController extends Controller
     {
         
         $this->validate($request, [
-            'site_name' => 'required',
+            'title' => 'required',
             'logo'=>'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             
         ]);
-
+    $site=SiteIdentity::findOrFail($id);
         if($request->hasFile('logo'))
         {
          $image=$request->file('logo');
          $imageName = time().'.'.$image->getClientOriginalExtension(); 
          $image->move(public_path('logo'), $imageName);
+        $oldFilename=$site->logo;
+        $site->logo=$imageName;  
+
+        File::delete(public_path('images/banner_image/'. $oldFilename));
+        
+        $site->update([
+            'logo'=>$imageName,
+        ]); 
+
+
         }else{
              $imageName=null;
  
         }
-        $site=SiteIdentity::findOrFail($id);
+      
         $site->update([
-            'site_name'=>$request->site_name,
+            'title'=>$request->site_name,
             'logo'=>$imageName,
+            'link'=>$request->link,
+
        ]);
        return redirect()
         ->route('siteidentity.index')
         ->with('success','siteIdenty has sucessfully update! Thankyou ');
-
-
-
-
-
     }
 
     /**

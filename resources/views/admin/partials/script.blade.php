@@ -16,5 +16,17 @@
   <!-- Page level custom scripts -->
   <script src="{{ asset('js/demo/chart-area-demo.js')}}"></script>
   <script src="{{ asset('js/demo/chart-pie-demo.js')}}"></script>
+   {{-- datatable script --}}
+  <script type="text/javascript" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
+  <script>
+    $(document).ready( function () {
+    
+    $('#datatable').DataTable( {
+        "scrollX": true
+    } );
+    
+    } );
+  </script>
+
  
 
