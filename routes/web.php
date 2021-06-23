@@ -8,6 +8,7 @@ use App\Http\Controllers\OurClientController;
 use App\Http\Controllers\OurWorkController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\SiteIdentityController;
+use App\Http\Controllers\UserController;
 use App\Models\Contactus;
 use Illuminate\Support\Facades\Route;
 
@@ -22,9 +23,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+Route::get('/',[UserController::class,'home']);
+Route::get('/about',[UserController::class,'about']);
+Route::get('/contact',[UserController::class,'contact']);
+Route::get('/portfolio',[UserController::class,'portfolio']);
+Route::get('/service',[UserController::class,'services']);
+
+
+
+
 Route::get('/admin',[AdminController::class,'index']);
 
 Route::prefix('admin')->group(function () {

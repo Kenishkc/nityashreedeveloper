@@ -22,7 +22,9 @@
     $(document).ready( function () {
     
     $('#datatable').DataTable( {
-        "scrollX": true
+        "scrollX": true,
+        "scrollY": 500,
+        
     } );
     
     } );

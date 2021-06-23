@@ -57,7 +57,7 @@ class AboutUsController extends Controller
             mkdir($destinationPath, 666, true);
         }
         $img = Image::make($image->path());
-        $img->resize(250,250, function ($constraint) {
+        $img->resize(255,255, function ($constraint) {
             $constraint->aspectRatio();
         })->save($destinationPath.'/'.$imageName);
  
